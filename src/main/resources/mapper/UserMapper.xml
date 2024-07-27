@@ -7,10 +7,10 @@
         <result property="name" column="name"/>
         <result property="age" column="age"/>
         <result property="email" column="email"/>
-        <result property="create_by" column="createBy"/>
-        <result property="create_time" column="createTime"/>
-        <result property="update_by" column="updateBy"/>
-        <result property="update_time" column="updateTime"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <!--共通属性抽出-->

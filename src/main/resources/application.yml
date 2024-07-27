@@ -11,4 +11,18 @@ server:
 spring:
   application:
     name: jyk-total
+  # 连接Mysql配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jyk_total
+    username: root
+    password: Dwxxls@2024
+    type: com.alibaba.druid.pool.DruidDataSource
+
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasesPackage: com.jyk.mapper
+  # 设置执行模式（SIMPLE, REUSE, BATCH），默认为SIMPLE
+  executorType: SIMPLE
 

@@ -1,6 +1,10 @@
 # 工程配置
 server:
+  # 设置内嵌tomcat端口
   port: 8080
+  servlet:
+    # 设置上下文根（访问路径）
+    context-path: /jyk-total
 
 
 # Spring配置

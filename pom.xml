@@ -58,6 +58,14 @@
             <version>3.14.0</version>
         </dependency>
 
+        <!-- gson 由Google提供的用来在Java对象和JSON数据之间进行映射的Java库 -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
+
 
 
 

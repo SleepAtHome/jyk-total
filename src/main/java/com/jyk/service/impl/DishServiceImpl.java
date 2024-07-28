@@ -75,6 +75,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public ResponseVo<List<Dish>> getDishByName(String dishName) {
-        return null;
+        List<Dish> dishes = dishMapper.selectDishesByNameLike(dishName);
+        return ResponseVo.success(dishes);
     }
 }

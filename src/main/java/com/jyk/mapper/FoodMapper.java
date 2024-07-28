@@ -1,8 +1,8 @@
 package com.jyk.mapper;
 
-import com.jyk.dao.Dish;
-import com.jyk.dao.User;
+import com.jyk.dao.Food;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import java.util.List;
  * @date : Created in 2024/7/28 0:45
  */
 @Mapper
-public interface DishMapper {
-    List<Dish> selectAllDishes();
+public interface FoodMapper {
+    List<Food> selectAllFoods();
 
-    List<Dish> selectDishesByNameLike(String name);
+    List<Food> selectFoodsByNameLike(@Param("name") String name);
 
-    int insertDish(Dish dish);
+    int insertFood(Food food);
 
 //    int updateUser(User user);
 //

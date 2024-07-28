@@ -1,5 +1,7 @@
 package com.jyk.dao;
 
+import com.google.gson.Gson;
+
 import java.util.Date;
 
 /**
@@ -119,17 +121,7 @@ public class Dish {
 
     @Override
     public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", dishName='" + dishName + '\'' +
-                ", food='" + food + '\'' +
-                ", seasoning='" + seasoning + '\'' +
-                ", chief='" + chief + '\'' +
-                ", price=" + price +
-                ", createBy='" + createBy + '\'' +
-                ", createTime=" + createTime +
-                ", updateBy='" + updateBy + '\'' +
-                ", updateTime=" + updateTime +
-                '}';
+        Gson g = new Gson();
+        return g.toJson(this);
     }
 }

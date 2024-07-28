@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyk.mapper.FoodMapper">
+    <resultMap id="foodResultMap" type="com.jyk.dao.Food">
+        <id property="id" column="id"/>
+        <result property="foodName" column="food_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--共通属性抽出-->
+    <sql id="Base_Column_List">
+        id,food_name,create_by,create_time,update_by,update_time
+    </sql>
+
+    <insert id="insertFood" parameterType="com.jyk.dao.Food">
+        insert into food(food_name,create_by,create_time,update_by,update_time)
+        values(#{foodName},#{createBy},#{createTime},#{updateBy},#{updateTime})
+    </insert>
+
+    <select id="selectAllFoods" resultMap="foodResultMap">
+        select <include refid="Base_Column_List" /> from food;
+    </select>
+
+    <select id="selectFoodsByNameLike" resultMap="foodResultMap">
+        select <include refid="Base_Column_List" /> from food
+        where food_name like CONCAT('%', #{name}, '%');
+    </select>
+
+
+</mapper>

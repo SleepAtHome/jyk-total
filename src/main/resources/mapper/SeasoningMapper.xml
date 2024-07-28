@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyk.mapper.SeasoningMapper">
+    <resultMap id="seasoningResultMap" type="com.jyk.dao.Seasoning">
+        <id property="id" column="id"/>
+        <result property="seasoningName" column="seasoning_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--共通属性抽出-->
+    <sql id="Base_Column_List">
+        id,seasoning_name,create_by,create_time,update_by,update_time
+    </sql>
+
+    <insert id="insertSeasoning" parameterType="com.jyk.dao.Food">
+        insert into seasoning(seasoning_name,create_by,create_time,update_by,update_time)
+        values(#{seasoningName},#{createBy},#{createTime},#{updateBy},#{updateTime})
+    </insert>
+
+    <select id="selectAllSeasoning" resultMap="seasoningResultMap">
+        select <include refid="Base_Column_List" /> from seasoning;
+    </select>
+
+    <select id="selectSeasoningByNameLike" resultMap="seasoningResultMap">
+        select <include refid="Base_Column_List" /> from seasoning
+        where seasoning_name like CONCAT('%', #{name}, '%');
+    </select>
+
+
+</mapper>

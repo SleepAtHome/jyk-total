@@ -20,13 +20,18 @@
         id,dish_name,food,seasoning,chief,price,create_by,create_time,update_by,update_time
     </sql>
 
-    <insert id="insertDish" parameterType="com.jyk.dao.User">
+    <insert id="insertDish" parameterType="com.jyk.dao.Dish">
         insert into dish(dish_name,food,seasoning,chief,price,create_by,create_time,update_by,update_time)
         values(#{dishName},#{food},#{seasoning},#{chief},#{price},#{createBy},#{createTime},#{updateBy},#{updateTime})
     </insert>
 
     <select id="selectAllDishes" resultMap="dishResultMap">
         select <include refid="Base_Column_List" /> from dish;
+    </select>
+
+    <select id="selectDishesByNameLike" resultMap="dishResultMap">
+        select <include refid="Base_Column_List" /> from dish
+        where dish_name like CONCAT('%', #{name}, '%');
     </select>
 
 

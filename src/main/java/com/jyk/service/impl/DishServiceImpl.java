@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,7 +76,12 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public ResponseVo<List<Dish>> getDishByName(String dishName) {
-        List<Dish> dishes = dishMapper.selectDishesByNameLike(dishName);
+        List<Dish> dishes = new ArrayList<>();
+        if (StringUtils.isEmpty(dishName)) {
+            dishes = dishMapper.selectAllDishes();
+        } else {
+            dishes = dishMapper.selectDishesByNameLike(dishName);
+        }
         return ResponseVo.success(dishes);
     }
 }

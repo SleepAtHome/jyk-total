@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @date : Created in 2021/10/1 16:45
  */
 @SpringBootApplication
-//@EnableScheduling  // 允许启动定时任务
+@EnableScheduling  // 允许启动定时任务
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class);

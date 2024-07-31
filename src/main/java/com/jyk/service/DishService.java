@@ -1,5 +1,6 @@
 package com.jyk.service;
 
+import com.jyk.controller.req.DishRequest;
 import com.jyk.dao.Dish;
 import com.jyk.vo.ResponseVo;
 
@@ -19,10 +20,10 @@ public interface DishService {
 
     /**
      * 增加一个菜品
-     * @param dish
+     * @param dishRequest
      * @return
      */
-    ResponseVo<Integer> insertOneDish(Dish dish);
+    ResponseVo<Integer> insertOneDish(DishRequest dishRequest);
 
     /**
      * 根据菜名获取菜品

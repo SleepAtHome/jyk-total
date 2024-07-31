@@ -1,5 +1,6 @@
 package com.jyk.service.impl;
 
+import com.jyk.controller.req.DishRequest;
 import com.jyk.dao.Dish;
 import com.jyk.enums.ResponseEnum;
 import com.jyk.mapper.DishMapper;
@@ -8,6 +9,7 @@ import com.jyk.vo.ResponseVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,23 +33,57 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public ResponseVo<Integer> insertOneDish(Dish dish) {
-        boolean paramResult = checkParam(dish);
+    public ResponseVo<Integer> insertOneDish(DishRequest dishRequest) {
+        Dish insertDish = new Dish();
+
+        insertDish.setDishName(dishRequest.getDishName());
+
+        String tempFood = "";
+        if (!CollectionUtils.isEmpty(dishRequest.getFoodList())) {
+            for (String food: dishRequest.getFoodList()) {
+                if (!StringUtils.isEmpty(food)) {
+                    tempFood = tempFood + food + ",";
+                }
+            }
+            if (tempFood.endsWith(",")) {
+                tempFood = tempFood.substring(0, tempFood.length() - 1);
+            }
+            insertDish.setFood(tempFood);
+        } else {
+            insertDish.setFood("");
+        }
+
+        String tempSeasoning = "";
+        if (!CollectionUtils.isEmpty(dishRequest.getSeasoningList())) {
+            for (String se: dishRequest.getSeasoningList()) {
+                if (!StringUtils.isEmpty(se)) {
+                    tempSeasoning = tempSeasoning + se + ",";
+                }
+            }
+            if (tempSeasoning.endsWith(",")) {
+                tempSeasoning = tempSeasoning.substring(0, tempSeasoning.length() - 1);
+            }
+            insertDish.setSeasoning(tempSeasoning);
+        } else {
+            insertDish.setSeasoning("");
+        }
+
+        boolean paramResult = checkParam(insertDish);
 
         if (!paramResult) {
             return ResponseVo.error(ResponseEnum.PARAM_ERROR);
         }
 
         // 如果更新人或者创建人为空，默认为景元奎
-        if (StringUtils.isEmpty(dish.getUpdateBy()) || StringUtils.isEmpty(dish.getCreateBy())) {
-            dish.setUpdateBy("景元奎");
-            dish.setCreateBy("景元奎");
+        if (StringUtils.isEmpty(insertDish.getUpdateBy()) || StringUtils.isEmpty(insertDish.getCreateBy())) {
+            insertDish.setUpdateBy("景元奎");
+            insertDish.setCreateBy("景元奎");
         }
         Date date = new Date();
-        dish.setCreateTime(date);
-        dish.setUpdateTime(date);
+        insertDish.setCreateTime(date);
+        insertDish.setUpdateTime(date);
 
-        int result = dishMapper.insertDish(dish);
+        int result = dishMapper.insertDish(insertDish);
 
         if (1 == result) {
             return ResponseVo.success(result);

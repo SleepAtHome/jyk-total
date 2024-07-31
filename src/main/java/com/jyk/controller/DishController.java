@@ -1,5 +1,6 @@
 package com.jyk.controller;
 
+import com.jyk.controller.req.DishRequest;
 import com.jyk.dao.Dish;
 import com.jyk.service.DishService;
 import com.jyk.vo.ResponseVo;
@@ -32,9 +33,9 @@ public class DishController {
     }
 
     @PostMapping("/add")
-    public ResponseVo<Integer> addOneDish(@RequestBody Dish dish) {
-        System.out.println("根据条件获取菜品,, 请求参数name为:  " + dish);
-        return dishService.insertOneDish(dish);
+    public ResponseVo<Integer> addOneDish(@RequestBody DishRequest dishRequest) {
+        System.out.println("根据条件获取菜品, 请求参数dishRequest为:  " + dishRequest);
+        return dishService.insertOneDish(dishRequest);
     }
 
 }

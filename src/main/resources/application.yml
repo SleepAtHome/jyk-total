@@ -18,6 +18,10 @@ spring:
     username: root
     password: Dwxxls@2024
     type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      # 上传文件大小设置最大为10MB。默认情况下，Spring Boot允许上传文件的大小为1MB
+      max-file-size: 10MB
 
 # MyBatis配置
 mybatis:

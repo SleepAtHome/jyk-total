@@ -19,7 +19,7 @@ public interface DishMapper {
 
     int insertDish(Dish dish);
 
-//    int updateUser(User user);
+    int updateDish(Dish dish);
 //
 //    int deleteUser(Integer id);
 }

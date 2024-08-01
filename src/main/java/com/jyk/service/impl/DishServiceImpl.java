@@ -9,8 +9,12 @@ import com.jyk.vo.ResponseVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -120,4 +124,56 @@ public class DishServiceImpl implements DishService {
         }
         return ResponseVo.success(dishes);
     }
+
+    @Override
+    public ResponseVo<Integer> uploadFiles(MultipartFile[] files, Integer dishId) {
+        // 上传文件步骤
+        String os = System.getProperty("os.name");
+        // windows系统
+        if (os.toLowerCase().startsWith("win")) {
+            // 获取项目相对路径
+            String projectPath = System.getProperty("user.dir");
+            String imgDir = projectPath + "\\files\\pic";
+            try {
+                saveFiles(files, imgDir, dishId);
+            } catch (IOException e) {
+                System.out.println("上传文件异常！！");
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+
+        return ResponseVo.success(1);
+    }
+
+    // TODO：可以加上事务管理
+    private void saveFiles(MultipartFile[] files, String dirPath, Integer dishId) throws IOException {
+        String imgNames = "";
+        for (MultipartFile file: files) {
+            // 确保目录存在
+            File uploadDirectory = new File(dirPath);
+            if (!uploadDirectory.exists()) {
+                uploadDirectory.mkdir();
+            }
+
+            // 文件全路径(包括文件名)
+            File finalFile = new File(dirPath + File.separator + file.getOriginalFilename());
+
+            // 将MultipartFile写入到目标文件
+            file.transferTo(finalFile);
+
+            System.out.println("上传文件："+dirPath + File.separator + file.getOriginalFilename());
+
+            imgNames = imgNames+file.getOriginalFilename()+",";
+
+        }
+        Dish updateDish = new Dish();
+        updateDish.setId(dishId);
+        updateDish.setImgDir(dirPath);
+        updateDish.setImgName(imgNames);
+        dishMapper.updateDish(updateDish);
+    }
+
 }

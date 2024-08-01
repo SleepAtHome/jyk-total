@@ -3,6 +3,7 @@ package com.jyk.service;
 import com.jyk.controller.req.DishRequest;
 import com.jyk.dao.Dish;
 import com.jyk.vo.ResponseVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,6 +33,12 @@ public interface DishService {
      */
     ResponseVo<List<Dish>> getDishByName(String dishName);
 
+    /**
+     * 上传文件
+     * @param files
+     * @return
+     */
+    ResponseVo<Integer> uploadFiles(MultipartFile[] files, Integer dishId);
     /*int updateUser(User user);
     int deleteUser(Integer id);*/
 }

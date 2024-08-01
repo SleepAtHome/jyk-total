@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS `dish` (
 		seasoning VARCHAR ( 100 ) NOT NULL,
 		chief VARCHAR ( 50 ) NOT NULL,
 		price INT,
+		img_dir VARCHAR ( 100 ),
+		img_name VARCHAR ( 50 ),
 		create_by VARCHAR ( 50 ) NOT NULL,
 		create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		update_by VARCHAR ( 50 ) NOT NULL,
@@ -39,3 +41,8 @@ CREATE TABLE IF NOT EXISTS `seasoning` (
 		update_by VARCHAR ( 50 ) NOT NULL,
 		update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
+
+
+INSERT INTO `jyk_total`.`dish`(`id`, `dish_name`, `food`, `seasoning`, `chief`, `price`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES (1, '咸蛋黄豆腐虾仁', '1,2,3', '4,5', '景元奎', 30, 'jyk', '2024-07-28 00:52:55', 'jyk', '2024-07-28 00:52:55');
+INSERT INTO `jyk_total`.`dish`(`id`, `dish_name`, `food`, `seasoning`, `chief`, `price`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES (2, '炒白菜', '2,3', '4,5', '景元奎', 20, '景元奎', '2024-07-28 01:30:33', '景元奎', '2024-07-28 01:30:33');
+INSERT INTO `jyk_total`.`dish`(`id`, `dish_name`, `food`, `seasoning`, `chief`, `price`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES (3, '耗油生菜', '1', '2', 'Jing yk', 10, '景元奎', '2024-07-28 22:46:15', '景元奎', '2024-07-28 22:46:15');

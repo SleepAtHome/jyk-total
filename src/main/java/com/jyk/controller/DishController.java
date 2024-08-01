@@ -6,6 +6,7 @@ import com.jyk.service.DishService;
 import com.jyk.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,6 +37,11 @@ public class DishController {
     public ResponseVo<Integer> addOneDish(@RequestBody DishRequest dishRequest) {
         System.out.println("根据条件获取菜品, 请求参数dishRequest为:  " + dishRequest);
         return dishService.insertOneDish(dishRequest);
+    }
+
+    @PostMapping("upload-file")
+    public ResponseVo<Integer> uploadDishFiles(@RequestParam("file") MultipartFile[] files, @RequestParam("dishId") Integer dishId) {
+        return dishService.uploadFiles(files, dishId);
     }
 
 }

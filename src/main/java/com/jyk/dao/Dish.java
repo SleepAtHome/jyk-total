@@ -34,6 +34,17 @@ public class Dish {
      * 价格
      */
     private Integer price;
+    /**
+     * 图片目录
+     */
+    private String imgDir;
+    /**
+     * 图片名称
+     */
+    private String imgName;
+
+
+
     private String createBy;
     private Date createTime;
     private String updateBy;
@@ -117,6 +128,22 @@ public class Dish {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getImgDir() {
+        return imgDir;
+    }
+
+    public void setImgDir(String imgDir) {
+        this.imgDir = imgDir;
+    }
+
+    public String getImgName() {
+        return imgName;
+    }
+
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
     }
 
     @Override

@@ -9,6 +9,8 @@
         <result property="seasoning" column="seasoning"/>
         <result property="chief" column="chief"/>
         <result property="price" column="price"/>
+        <result property="imgDir" column="img_dir"/>
+        <result property="imgName" column="img_name"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
@@ -17,7 +19,7 @@
 
     <!--共通属性抽出-->
     <sql id="Base_Column_List">
-        id,dish_name,food,seasoning,chief,price,create_by,create_time,update_by,update_time
+        id,dish_name,food,seasoning,chief,price,img_dir,img_name,create_by,create_time,update_by,update_time
     </sql>
 
     <insert id="insertDish" parameterType="com.jyk.dao.Dish">
@@ -33,6 +35,19 @@
         select <include refid="Base_Column_List" /> from dish
         where dish_name like CONCAT('%', #{name}, '%');
     </select>
+
+    <update id="updateDish" parameterType="com.jyk.dao.Dish">
+        update dish
+        <set>
+            <if test="imgDir != null">
+                img_dir = #{imgDir},
+            </if>
+            <if test="imgName != null">
+                img_name = #{imgName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 
 </mapper>

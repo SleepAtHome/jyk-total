@@ -45,6 +45,10 @@
             <if test="imgName != null">
                 img_name = #{imgName},
             </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            update_time = NOW()
         </set>
         where id = #{id}
     </update>

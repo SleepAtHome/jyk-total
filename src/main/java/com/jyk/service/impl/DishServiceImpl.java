@@ -7,7 +7,9 @@ import com.jyk.mapper.DishMapper;
 import com.jyk.service.DishService;
 import com.jyk.vo.ResponseVo;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -25,6 +27,7 @@ import java.util.List;
  * @date : Created in 2024/7/28 0:26
  */
 @Service
+@EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true) // 在一个类中调用本类的方法，让事务生效
 public class DishServiceImpl implements DishService {
 
     @Autowired
@@ -135,7 +138,9 @@ public class DishServiceImpl implements DishService {
             String projectPath = System.getProperty("user.dir");
             String imgDir = projectPath + "\\files\\pic";
             try {
-                saveFiles(files, imgDir, dishId);
+                // 调用本类事务方法，不能本类直接调用，因为这样就没有经过Spring容器，事务就不会生效，需要通过Spring去调用
+                DishServiceImpl currentProxy = (DishServiceImpl) AopContext.currentProxy();
+                currentProxy.saveFiles(files, imgDir, dishId);
             } catch (IOException e) {
                 System.out.println("上传文件异常！！");
                 throw new RuntimeException(e);
@@ -148,32 +153,35 @@ public class DishServiceImpl implements DishService {
         return ResponseVo.success(1);
     }
 
-    // TODO：可以加上事务管理
-    private void saveFiles(MultipartFile[] files, String dirPath, Integer dishId) throws IOException {
+    @Transactional(rollbackFor = Exception.class)
+    public void saveFiles(MultipartFile[] files, String dirPath, Integer dishId) throws IOException {
+        // 写入数据库
         String imgNames = "";
+        for (MultipartFile file: files) {
+            imgNames = imgNames+file.getOriginalFilename()+",";
+        }
+        Dish updateDish = new Dish();
+        updateDish.setId(dishId);
+        updateDish.setImgDir(dirPath);
+        updateDish.setImgName(imgNames);
+        updateDish.setUpdateBy("JYK-uploadFiles");
+        // updateTime在Mapper文件里写
+        dishMapper.updateDish(updateDish);
+
+        // 写入文件
         for (MultipartFile file: files) {
             // 确保目录存在
             File uploadDirectory = new File(dirPath);
             if (!uploadDirectory.exists()) {
                 uploadDirectory.mkdir();
             }
-
             // 文件全路径(包括文件名)
             File finalFile = new File(dirPath + File.separator + file.getOriginalFilename());
-
             // 将MultipartFile写入到目标文件
             file.transferTo(finalFile);
 
             System.out.println("上传文件："+dirPath + File.separator + file.getOriginalFilename());
-
-            imgNames = imgNames+file.getOriginalFilename()+",";
-
         }
-        Dish updateDish = new Dish();
-        updateDish.setId(dishId);
-        updateDish.setImgDir(dirPath);
-        updateDish.setImgName(imgNames);
-        dishMapper.updateDish(updateDish);
     }
 
 }

@@ -65,10 +65,12 @@
             <version>2.10.1</version>
         </dependency>
 
-
-
-
-
+        <!-- spring-boot-starter-aop 切面&事务 最高到2.7.18 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>2.7.18</version>
+        </dependency>
 
     </dependencies>
 

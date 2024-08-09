@@ -1,6 +1,7 @@
 package com.jyk.service;
 
 import com.jyk.dao.User;
+import com.jyk.vo.ResponseVo;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public interface UserService {
 
     List<User> selectAllUser();
     int insertUser(User user);
+    ResponseVo<Boolean> login(User user);
     /*User getUserById(Integer id);
     int updateUser(User user);
     int deleteUser(Integer id);*/

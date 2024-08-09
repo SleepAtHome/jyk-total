@@ -2,7 +2,7 @@ package com.jyk.mapper;
 
 import com.jyk.dao.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,6 +15,8 @@ import java.util.List;
 // @Repository
 public interface UserMapper {
     List<User> selectAllUser();
+
+    User selectUserByAccount(@Param("account") String account);
 
     User getUserById(Integer id);
 

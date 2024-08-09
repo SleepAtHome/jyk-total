@@ -3,6 +3,7 @@ package com.jyk.controller;
 import com.jyk.controller.resp.JYKResp;
 import com.jyk.dao.User;
 import com.jyk.service.UserService;
+import com.jyk.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +41,12 @@ public class UserController {
         user1.setUpdateTime(date);
         return userService.insertUser(user1);
     }
+
+    @PostMapping("/login")
+    public ResponseVo<Boolean> login(@RequestBody User user) {
+
+        return userService.login(user);
+    }
+
 
 }

@@ -4,6 +4,8 @@
 <mapper namespace="com.jyk.mapper.UserMapper">
     <resultMap id="userResultMap" type="com.jyk.dao.User">
         <id property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
         <result property="name" column="name"/>
         <result property="age" column="age"/>
         <result property="email" column="email"/>
@@ -15,16 +17,21 @@
 
     <!--共通属性抽出-->
     <sql id="Base_Column_List">
-        id,name,age,email,create_by,create_time,update_by,update_time
+        id,account,password,name,age,email,create_by,create_time,update_by,update_time
     </sql>
 
     <insert id="insertUser" parameterType="com.jyk.dao.User">
         insert into user(<include refid="Base_Column_List" />)
-        values(#{id},#{name},#{age},#{email},#{createBy},#{createTime},#{updateBy},#{updateTime})
+        values(#{id},#{account},#{password},#{name},#{age},#{email},#{createBy},#{createTime},#{updateBy},#{updateTime})
     </insert>
 
     <select id="selectAllUser" resultMap="userResultMap">
         select <include refid="Base_Column_List" /> from user;
+    </select>
+
+    <select id="selectUserByAccount" resultMap="userResultMap">
+        select <include refid="Base_Column_List" /> from user
+        where account = #{account};
     </select>
 
 

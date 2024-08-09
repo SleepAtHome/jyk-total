@@ -15,6 +15,7 @@ public enum ResponseEnum {
     BODY_NOT_MATCH("E002","请求的数据格式不符!"),
     INTERNAL_SERVER_ERROR("E003", "服务器内部错误!"),
     PARAM_ERROR("E004", "参数错误!"),
+    LOGIN_ERROR("E005", "登录失败!"),
     ;
 
     /**

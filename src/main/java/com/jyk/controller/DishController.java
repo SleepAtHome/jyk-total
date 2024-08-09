@@ -40,7 +40,7 @@ public class DishController {
     }
 
     @PostMapping("upload-file")
-    public ResponseVo<Integer> uploadDishFiles(@RequestParam("file") MultipartFile[] files, @RequestParam("dishId") Integer dishId) {
+    public ResponseVo<Integer> uploadDishFiles(@RequestParam("file") MultipartFile[] files, @RequestParam("id") Integer dishId) {
         return dishService.uploadFiles(files, dishId);
     }
 

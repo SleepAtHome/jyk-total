@@ -1,9 +1,12 @@
 package com.jyk.aop;
 
+import com.jyk.controller.DishController;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,6 +22,9 @@ import java.util.Enumeration;
 @Aspect
 @Component
 public class ControllerAspect {
+
+    private static final Logger logger = LoggerFactory.getLogger(ControllerAspect.class);
+
     /**
      * 指定切入点表达式
      * public * com.hkl.modules.*.controller..*(..))
@@ -45,7 +51,7 @@ public class ControllerAspect {
     // 前置通知
     @Before("pointcut()")
     public void beforeMethod(JoinPoint joinPoint) {
-        System.out.println("Before method pointCut: " + joinPoint.getSignature().getName());
+        logger.info("Before method pointCut: {}", joinPoint.getSignature().getName());
 
         // 处理请求头
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -56,7 +62,7 @@ public class ControllerAspect {
                 String headerName = headerNames.nextElement();
                 String headerValue = request.getHeader(headerName);
                 // 这里可以根据需要处理请求头信息
-                System.out.println(headerName + ": " + headerValue);
+                logger.info("{} : {}", headerName, headerValue);
             }
         }
 

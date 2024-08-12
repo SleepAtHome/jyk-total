@@ -7,6 +7,7 @@ Java版本：8<br>
 SpringBoot版本: 2.7.18(这是最后支持 Java8 的Spring Boot版本了)<br>
 apache commons-lang3 3.14.0<br>
 gson 2.10.1 <br>
+Log4j2
 
 ## 中间件
 Mysql 版本8.0.39社区版<br>

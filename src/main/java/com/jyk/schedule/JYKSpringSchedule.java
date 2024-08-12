@@ -1,5 +1,7 @@
 package com.jyk.schedule;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class JYKSpringSchedule {
 
+    private static final Logger logger = LoggerFactory.getLogger(JYKSpringSchedule.class);
+
     @Scheduled(fixedRate = 10000)
     public void reportCurrentTime() {
-        System.out.println("现在时间：" + System.currentTimeMillis());
+
+        logger.info("现在时间：{}", System.currentTimeMillis());
+
     }
 }

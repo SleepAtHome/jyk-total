@@ -1,0 +1,24 @@
+日志框架出现的历史顺序
+log4j --> JUL --> JCL --> slf4j --> logback --> log4j2
+log4j2是 log4j 1.x 的升级版，2015 年 5 月，Apache 宣布 log4j 1.x 停止更新，最新版截止到 1.2.17。
+
+
+分析依赖：
+打开terminal
+mvn dependency:tree
+
+
+日式格式：
+PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} %-5r [%t] [%-5p] %c{1} %x - %m%n"
+%-d{yyyy-MM-dd HH:mm:ss}  日期
+
+%-5r  输出从JVM启动到创建日志事件所经过的毫秒数
+
+[%t] 线程名
+
+[%-5p] 日志级别
+
+%c{1} 记录器名称，大括号数字为精度，不加精度就是完整记录器名称
+
+%m 日志内容
+%n 换行

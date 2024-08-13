@@ -1,6 +1,7 @@
 package com.jyk.controller;
 
 import com.jyk.controller.resp.JYKResp;
+import com.jyk.controller.resp.LoginResp;
 import com.jyk.dao.User;
 import com.jyk.service.UserService;
 import com.jyk.vo.ResponseVo;
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseVo<Boolean> login(@RequestBody User user) {
+    public ResponseVo<LoginResp> login(@RequestBody User user) {
 
         return userService.login(user);
     }

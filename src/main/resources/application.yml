@@ -22,6 +22,12 @@ spring:
     multipart:
       # 上传文件大小设置最大为10MB。默认情况下，Spring Boot允许上传文件的大小为1MB
       max-file-size: 10MB
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    # 密码
+    password: 123456
 
 # MyBatis配置
 mybatis:

@@ -1,5 +1,7 @@
 package com.jyk.controller.resp;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 /**
@@ -52,5 +54,11 @@ public class JYKResp {
 
     public void setHobby(List<String> hobby) {
         this.hobby = hobby;
+    }
+
+    @Override
+    public String toString() {
+        Gson g = new Gson();
+        return g.toJson(this);
     }
 }

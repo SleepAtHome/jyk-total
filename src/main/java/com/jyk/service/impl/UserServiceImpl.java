@@ -1,10 +1,13 @@
 package com.jyk.service.impl;
 
+import com.jyk.controller.resp.LoginResp;
 import com.jyk.dao.User;
 import com.jyk.enums.ResponseEnum;
 import com.jyk.mapper.UserMapper;
 import com.jyk.service.UserService;
+import com.jyk.utils.RedisUtils;
 import com.jyk.utils.RsaUtils;
+import com.jyk.utils.TokenUtil;
 import com.jyk.vo.ResponseVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    RedisUtils redisUtils;
+
     @Override
     public List<User> selectAllUser() {
         return userMapper.selectAllUser();
@@ -38,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseVo<Boolean> login(User user) {
+    public ResponseVo<LoginResp> login(User user) {
         // 判断入参
         if (null==user || StringUtils.isEmpty(user.getAccount()) || StringUtils.isEmpty(user.getPassword())) {
             System.out.println("登录失败，账号或密码为空");
@@ -76,7 +82,10 @@ public class UserServiceImpl implements UserService {
         userInfo.setSessionId(sessionId);
         return R.ok(userInfo);*/
 
-
-        return ResponseVo.success(true);
+        LoginResp loginResp = new LoginResp();
+        String token = TokenUtil.initToken();
+        loginResp.setToken(token);
+        redisUtils.set(dataU.getAccount(), token, 300);
+        return ResponseVo.success(loginResp);
     }
 }

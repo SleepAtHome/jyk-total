@@ -1,7 +1,6 @@
 package com.jyk.mapper;
 
 import com.jyk.dao.Dish;
-import com.jyk.dao.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

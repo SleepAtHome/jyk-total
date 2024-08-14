@@ -45,6 +45,21 @@ CREATE TABLE IF NOT EXISTS `seasoning` (
 		update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
 
+
+-- TODO: 增加事项日期
+CREATE TABLE IF NOT EXISTS `check_list_day` (
+		id INT AUTO_INCREMENT PRIMARY KEY COMMENT '主键id',
+		user_id INT COMMENT '用户id',
+		matter VARCHAR ( 50 )  NOT NULL COMMENT '事项',
+		frequency INT COMMENT '频率',
+		finished INT DEFAULT 0 COMMENT '是否完成 完成-1 未完成-0',
+		progress INT DEFAULT 0 COMMENT '完成进度 0-100 100为完成',
+		create_by VARCHAR ( 50 ) NOT NULL,
+		create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		update_by VARCHAR ( 50 ) NOT NULL,
+		update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
+
 INSERT INTO `jyk_total`.`user`(`id`, `account`, `password`, `name`, `age`, `email`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES (1, 'jyk', 'jyk', '景元奎', 28, '773669388@qq.com', 'jyk', '2024-07-27 20:59:00', 'jyk', '2024-07-27 20:59:00');
 
 INSERT INTO `jyk_total`.`dish`(`id`, `dish_name`, `food`, `seasoning`, `chief`, `price`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES (1, '咸蛋黄豆腐虾仁', '1,2,3', '4,5', '景元奎', 30, 'jyk', '2024-07-28 00:52:55', 'jyk', '2024-07-28 00:52:55');

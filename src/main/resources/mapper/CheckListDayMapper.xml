@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyk.mapper.CheckListDayMapper">
+    <resultMap id="checkListDayResultMap" type="com.jyk.dao.CheckListDay">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="matter" column="matter"/>
+        <result property="frequency" column="frequency"/>
+        <result property="finished" column="finished"/>
+        <result property="progress" column="progress"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--共通属性抽出-->
+    <sql id="Base_Column_List">
+        id,user_id,matter,frequency,finished,progress,create_by,create_time,update_by,update_time
+    </sql>
+
+    <insert id="insertOneMapper" parameterType="com.jyk.dao.CheckListDay">
+        insert into check_list_day(user_id,matter,frequency,finished,progress,create_by,create_time,update_by,update_time)
+        values(#{dishName},#{food},#{seasoning},#{chief},#{price},#{createBy},#{createTime},#{updateBy},#{updateTime})
+    </insert>
+
+    <select id="selectAllMappers" resultMap="checkListDayResultMap">
+        select <include refid="Base_Column_List" /> from check_list_day;
+    </select>
+
+    <select id="selectMappersByCondition" parameterType="com.jyk.dao.CheckListDay" resultMap="checkListDayResultMap">
+        select * from check_list_day
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="matter != null">
+                and matter = #{matter}
+            </if>
+            <if test="frequency != null">
+                and frequency = #{frequency}
+            </if>
+            <if test="finished != null">
+                and finished = #{finished}
+            </if>
+            <if test="progress != null">
+                and progress = #{progress}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updateOneMapper" parameterType="com.jyk.dao.CheckListDay">
+        update dish
+        <set>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="matter != null">
+                and matter = #{matter}
+            </if>
+            <if test="frequency != null">
+                and frequency = #{frequency}
+            </if>
+            <if test="finished != null">
+                and finished = #{finished}
+            </if>
+            <if test="progress != null">
+                and progress = #{progress}
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            update_time = NOW()
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

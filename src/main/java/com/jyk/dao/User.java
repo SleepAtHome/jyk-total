@@ -1,5 +1,7 @@
 package com.jyk.dao;
 
+import com.google.gson.Gson;
+
 import java.util.Date;
 
 /**
@@ -97,5 +99,11 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        Gson g = new Gson();
+        return g.toJson(this);
     }
 }

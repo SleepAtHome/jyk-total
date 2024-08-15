@@ -45,8 +45,6 @@ CREATE TABLE IF NOT EXISTS `seasoning` (
 		update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
 
-
--- TODO: 增加事项日期
 CREATE TABLE IF NOT EXISTS `check_list_day` (
 		id INT AUTO_INCREMENT PRIMARY KEY COMMENT '主键id',
 		user_id INT COMMENT '用户id',
@@ -54,6 +52,23 @@ CREATE TABLE IF NOT EXISTS `check_list_day` (
 		frequency INT COMMENT '频率',
 		finished INT DEFAULT 0 COMMENT '是否完成 完成-1 未完成-0',
 		progress INT DEFAULT 0 COMMENT '完成进度 0-100 100为完成',
+		create_by VARCHAR ( 50 ) NOT NULL,
+		create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		update_by VARCHAR ( 50 ) NOT NULL,
+		update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `check_list_record` (
+		id INT AUTO_INCREMENT PRIMARY KEY COMMENT '主键id',
+		user_id INT NOT NULL COMMENT '用户id',
+		matter_id INT NOT NULL COMMENT '清单表id',
+		check_list_type INT NOT NULL COMMENT '清单类型，对应清单表后缀 1-day 2-week 3-month 4-year',
+		matter_start_time TIMESTAMP COMMENT '事项开始时间',
+		matter_finish_time TIMESTAMP COMMENT '事项完成时间',
+		finished INT DEFAULT 0 COMMENT '是否完成 完成-1 未完成-0',
+		progress INT DEFAULT 0 COMMENT '完成进度 0-100 100为完成',
+		memo VARCHAR ( 200 )  COMMENT '备注',
+		weight INT default 9 COMMENT '权重 0-9 0最重要',
 		create_by VARCHAR ( 50 ) NOT NULL,
 		create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		update_by VARCHAR ( 50 ) NOT NULL,

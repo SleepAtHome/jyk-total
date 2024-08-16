@@ -18,4 +18,6 @@ public interface CheckListRecordService {
      * @return
      */
     ResponseVo<List<CheckListRecord>> getTodayMapper(CheckListRecord checkListRecord);
+
+    ResponseVo<Integer> insertOneMapperRecordCondition(CheckListRecord checkListRecord);
 }

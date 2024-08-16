@@ -18,7 +18,7 @@ public interface CheckListRecordMapper {
 
     List<CheckListRecord> selectTodayMappersByCondition(CheckListRecord checkListRecord);
 
-    //int insertOneMapper(CheckListRecord checkListRecord);
+    int insertOneMapperRecordCondition(CheckListRecord checkListRecord);
 
     //int updateOneMapper(CheckListRecord checkListRecord);
 }

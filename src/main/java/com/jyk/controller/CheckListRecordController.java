@@ -31,4 +31,10 @@ public class CheckListRecordController {
         logger.info("获取今日事项, 查询条件: {} ", checkListRecord);
         return checkListRecordService.getTodayMapper(checkListRecord);
     }
+
+    @PostMapping("/add")
+    public ResponseVo<Integer> addOneMapperRecordCondition(@RequestBody CheckListRecord checkListRecord) {
+        logger.info("增加今日事项, 入参: {} ", checkListRecord);
+        return checkListRecordService.insertOneMapperRecordCondition(checkListRecord);
+    }
 }

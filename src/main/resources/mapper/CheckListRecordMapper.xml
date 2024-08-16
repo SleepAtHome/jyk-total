@@ -24,10 +24,85 @@
         id, user_id, matter_id, check_list_type, matter_start_time , matter_finish_time, finished, progress, memo, weight, create_by, create_time, update_by, update_time
     </sql>
 
-    <!--<insert id="insertOneMapper" parameterType="com.jyk.dao.CheckListDay">
-        insert into check_list_day(user_id,matter,frequency,finished,progress,create_by,create_time,update_by,update_time)
-        values(#{dishName},#{food},#{seasoning},#{chief},#{price},#{createBy},#{createTime},#{updateBy},#{updateTime})
-    </insert>-->
+
+    <insert id="insertOneMapperRecordCondition" parameterType="com.jyk.dao.CheckListRecord">
+        insert into check_list_day
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="matterId != null">
+                matter_id,
+            </if>
+            <if test="checkListType != null">
+                check_list_type,
+            </if>
+            <if test="matterStartTime != null">
+                matter_start_time,
+            </if>
+            <if test="matterFinishTime != null">
+                matter_finish_time,
+            </if>
+            <if test="finished != null">
+                finished,
+            </if>
+            <if test="progress != null">
+                progress,
+            </if>
+            <if test="memo != null">
+                memo,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            create_time,
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            update_time
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="matterId != null">
+                #{matterId},
+            </if>
+            <if test="checkListType != null">
+                #{checkListType},
+            </if>
+            <if test="matterStartTime != null">
+                #{matterStartTime},
+            </if>
+            <if test="matterFinishTime != null">
+                #{matterFinishTime},
+            </if>
+            <if test="finished != null">
+                #{finished},
+            </if>
+            <if test="progress != null">
+                #{progress},
+            </if>
+            <if test="memo != null">
+                #{memo},
+            </if>
+            <if test="weight != null">
+                #{weight},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            NOW(),
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            NOW()
+        </trim>
+    </insert>
 
     <!--<select id="selectAllMappers" resultMap="checkListDayResultMap">
         select <include refid="Base_Column_List" /> from check_list_day;

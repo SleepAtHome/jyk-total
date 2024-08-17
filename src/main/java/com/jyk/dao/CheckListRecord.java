@@ -59,8 +59,9 @@ public class CheckListRecord {
         this.updateTime = updateTime;
     }
 
-    public CheckListRecord(Integer userId) {
+    public CheckListRecord(Integer userId, Integer matterId) {
         this.userId = userId;
+        this.matterId = matterId;
     }
 
     public Integer getId() {

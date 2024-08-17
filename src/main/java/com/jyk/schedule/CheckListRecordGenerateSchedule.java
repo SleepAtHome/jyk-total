@@ -14,9 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author : Jing Yuankui
@@ -25,7 +23,7 @@ import java.util.Map;
  */
 @Component
 public class CheckListRecordGenerateSchedule {
-    private static final Logger logger = LoggerFactory.getLogger(JYKSpringSchedule.class);
+    private static final Logger logger = LoggerFactory.getLogger(CheckListRecordGenerateSchedule.class);
 
     @Autowired
     CheckListRecordMapper checkListRecordMapper;
@@ -57,7 +55,7 @@ public class CheckListRecordGenerateSchedule {
             return;
         }
 
-        // 2. 查找用户每日清单
+        // 2. 查找单个用户每日清单
         for (User user: userList) {
             logger.info("开始生成每日清单任务， 用户：{}", user.getName());
 
@@ -67,24 +65,29 @@ public class CheckListRecordGenerateSchedule {
                 continue;
             }
 
-            // 3. 插入每日清单记录
+            // 3. 单个用户的单个事件：校验并插入每日清单记录
             for (CheckListDay checkListDay: checkListDayList) {
-                // 如果用户当日有记录，则不执行插入
-
-                List<CheckListRecord> existList = checkListRecordMapper.selectTodayMappersByCondition(new CheckListRecord(checkListDay.getUserId()));
-                Map<Integer, Integer> generatedMap = new HashMap<>();
-
-
-                if (CollectionUtils.isEmpty(existList)) {
-                    logger.warn("用户当日有记录，跳过生成每日清单任务， 用户：{}， 每日清单：{}", user.getName(), checkListDay.getMatter());
-                    continue;
+                List<CheckListRecord> existList = checkListRecordMapper.selectTodayMappersByCondition(new CheckListRecord(checkListDay.getUserId(), checkListDay.getId()));
+                // 如果用户当日有记录，则先校验
+                // generateCount 当天已生成的次数
+                int generateCount = 0;
+                if (!CollectionUtils.isEmpty(existList)) {
+                    generateCount = existList.size();
+                    if (generateCount >= checkListDay.getFrequency()) {
+                        logger.warn("用户：{}， 每日事项：{}， 当天已经生成了{}次， 不需要再生成", user.getName(), checkListDay.getMatter(), generateCount);
+                        continue;
+                    }
                 }
-                CheckListRecord checkListRecord = getCheckListRecord(checkListDay);
-                int result = checkListRecordMapper.insertOneMapperRecordCondition(checkListRecord);
-                if (result == 1 ) {
-                    logger.info("生成每日清单任务成功， 用户：{}， 每日清单：{}", user.getName(), checkListDay.getMatter());
-                } else {
-                    logger.warn("生成每日清单任务失败， 用户：{}， 每日清单：{}", user.getName(), checkListDay.getMatter());
+
+                // 创建对应频率的每日清单记录(要减掉已生成的记录)
+                for (int i = 0; i < checkListDay.getFrequency() - generateCount; i++) {
+                    CheckListRecord checkListRecord = getCheckListRecord(checkListDay);
+                    int result = checkListRecordMapper.insertOneMapperRecordCondition(checkListRecord);
+                    if (result == 1 ) {
+                        logger.info("生成每日清单任务成功， 用户：{}， 每日清单：{}", user.getName(), checkListDay.getMatter());
+                    } else {
+                        logger.warn("生成每日清单任务失败， 用户：{}， 每日清单：{}", user.getName(), checkListDay.getMatter());
+                    }
                 }
             }
         }

@@ -41,6 +41,26 @@ public class CheckListDay {
     private String updateBy;
     private Date updateTime;
 
+    public CheckListDay() {
+    }
+
+    public CheckListDay(Integer id, Integer userId, String matter, Integer frequency, Integer finished, Integer progress, String createBy, Date createTime, String updateBy, Date updateTime) {
+        this.id = id;
+        this.userId = userId;
+        this.matter = matter;
+        this.frequency = frequency;
+        this.finished = finished;
+        this.progress = progress;
+        this.createBy = createBy;
+        this.createTime = createTime;
+        this.updateBy = updateBy;
+        this.updateTime = updateTime;
+    }
+
+    public CheckListDay(Integer userId) {
+        this.userId = userId;
+    }
+
     public Integer getId() {
         return id;
     }

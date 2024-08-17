@@ -39,6 +39,30 @@ public class CheckListRecord {
     // 更新时间
     private Date updateTime;
 
+    public CheckListRecord() {
+    }
+
+    public CheckListRecord(Integer id, Integer userId, Integer matterId, Integer checkListType, Date matterStartTime, Date matterFinishTime, Integer finished, Integer progress, String memo, Integer weight, String createBy, Date createTime, String updateBy, Date updateTime) {
+        this.id = id;
+        this.userId = userId;
+        this.matterId = matterId;
+        this.checkListType = checkListType;
+        this.matterStartTime = matterStartTime;
+        this.matterFinishTime = matterFinishTime;
+        this.finished = finished;
+        this.progress = progress;
+        this.memo = memo;
+        this.weight = weight;
+        this.createBy = createBy;
+        this.createTime = createTime;
+        this.updateBy = updateBy;
+        this.updateTime = updateTime;
+    }
+
+    public CheckListRecord(Integer userId) {
+        this.userId = userId;
+    }
+
     public Integer getId() {
         return id;
     }

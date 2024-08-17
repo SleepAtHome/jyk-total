@@ -15,7 +15,8 @@ public class JYKSpringSchedule {
 
     private static final Logger logger = LoggerFactory.getLogger(JYKSpringSchedule.class);
 
-    @Scheduled(fixedRate = 10000)
+    // 每隔1小时执行一次
+    @Scheduled(fixedRate = 1000*60*60)
     public void reportCurrentTime() {
 
         logger.info("现在时间：{}", System.currentTimeMillis());

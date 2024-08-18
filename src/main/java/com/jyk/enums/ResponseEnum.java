@@ -16,6 +16,10 @@ public enum ResponseEnum {
     INTERNAL_SERVER_ERROR("E003", "服务器内部错误!"),
     PARAM_ERROR("E004", "参数错误!"),
     LOGIN_ERROR("E005", "登录失败!"),
+
+
+    // E100开始-业务异常
+    USER_NO_CHECKLIST_ERROR("E101", "用户没有每日清单!"),
     ;
 
     /**

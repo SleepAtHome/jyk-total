@@ -37,4 +37,15 @@ public class CheckListRecordController {
         logger.info("增加今日事项, 入参: {} ", checkListRecord);
         return checkListRecordService.insertOneMapperRecordCondition(checkListRecord);
     }
+
+    /**
+     * 手动生成当天未生成的事项记录（根据最新的配置生成），入参为用户ID
+     * @param checkListRecord
+     * @return
+     */
+    @PostMapping("/manually-generated")
+    public ResponseVo<Integer> manuallyGenerated(@RequestBody CheckListRecord checkListRecord) {
+        logger.info("手动生成今日事项, 入参: {} ", checkListRecord);
+        return checkListRecordService.insertOneMapperRecordCondition(checkListRecord);
+    }
 }

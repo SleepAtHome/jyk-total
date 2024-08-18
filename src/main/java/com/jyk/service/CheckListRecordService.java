@@ -20,4 +20,11 @@ public interface CheckListRecordService {
     ResponseVo<List<CheckListRecord>> getTodayMapper(CheckListRecord checkListRecord);
 
     ResponseVo<Integer> insertOneMapperRecordCondition(CheckListRecord checkListRecord);
+
+    /**
+     * 手动生成当天未生成的事项记录（根据最新的配置生成），入参为用户ID
+     * @param checkListRecord
+     * @return
+     */
+    ResponseVo<Integer> manuallyGenerated(CheckListRecord checkListRecord);
 }

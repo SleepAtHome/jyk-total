@@ -2,6 +2,90 @@
 版本8.0.39社区版 先安装Windows版本，在本地 <br>
 下载地址：https://dev.mysql.com/downloads/mysql/<br>
 
+Linux版本：选择对应版本进行下载，Centos系统选择Red Hat选项
+
+下载安装包：
+mysql-8.0.39-1.el9.x86_64.rpm-bundle.tar
+
+解压后将这几个文件上传到服务器：
+mysql-community-common-8.0.39-1.el9.x86_64.rpm
+mysql-community-client-plugins-8.0.39-1.el9.x86_64.rpm
+mysql-community-libs-8.0.39-1.el9.x86_64.rpm
+mysql-community-client-8.0.39-1.el9.x86_64.rpm
+mysql-community-icu-data-files-8.0.39-1.el9.x86_64.rpm
+mysql-community-server-8.0.39-1.el9.x86_64.rpm
+
+修改/tmp临时目录权限
+执行chmod -R 777 /tmp命令即可。
+检查依赖
+rpm -qa | grep libaio
+rpm -qa | grep net-tools
+如果不存在，需要进行rpm安装。
+
+rpm -ivh mysql-community-common-8.0.39-1.el9.x86_64.rpm
+rpm -ivh mysql-community-client-plugins-8.0.39-1.el9.x86_64.rpm
+rpm -ivh mysql-community-libs-8.0.39-1.el9.x86_64.rpm
+rpm -ivh mysql-community-client-8.0.39-1.el9.x86_64.rpm
+rpm -ivh mysql-community-icu-data-files-8.0.39-1.el9.x86_64.rpm
+rpm -ivh mysql-community-server-8.0.39-1.el9.x86_64.rpm
+
+
+---
+yum install mysql
+yum list installed | grep mysql
+yum install mysql-server
+mysqld --initialize --user=mysql
+cat /var/log/mysql/mysqld.log 查看临时密码 _+Yo*hP*j5!s
+
+systemctl start mysqld
+systemctl status mysqld
+mysql -uroot -p输入密码 或者 mysql -uroot -p回车再输入密码
+
+alter user 'root'@'localhost' identified by 'Dwxxls@2024';
+
+设置root为可以远程连接
+//查看所有数据库
+show databases;
+//切换到mysql数据库
+use mysql;
+//查看root用户权限
+select host,user from user;
+//将root用户设置为任意远程连接
+update user set host='%' where  user='root';
+// 刷新权限
+flush privileges;
+// mysql8要执行
+alter user 'root'@'%' identified with mysql_native_password by 'Dwxxls@2024';
+
+记得在阿里云上开通防火墙端口
+
+参考文档：https://zhuanlan.zhihu.com/p/688679313
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Windows版本安装步骤：
 1. 加环境变量： D:\source\mysql-8.0.39-winx64\bin
 2. 创建D:\source\mysql-8.0.39-winx64\my.ini文件

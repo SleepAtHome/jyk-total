@@ -41,10 +41,10 @@ public class CheckListRecordGenerateSchedule {
      * initialDelay: 在第一次执行任务前等待的时间，单位是毫秒。
      * cron: 使用 Cron 表达式来定义执行的时间表。
      *
-     * 半小时执行一次
+     * 一小时执行一次
      */
     //@Scheduled(cron = "0 */30 * * * ?")
-    @Scheduled(fixedDelay = 1000*10)
+    @Scheduled(fixedDelay = 1000*60*60)
     public void generate () {
         logger.info("开始生成每日清单任务， 开始时间：{}", System.currentTimeMillis());
 
@@ -81,7 +81,7 @@ public class CheckListRecordGenerateSchedule {
 
                 // 创建对应频率的每日清单记录(要减掉已生成的记录)
                 for (int i = 0; i < checkListDay.getFrequency() - generateCount; i++) {
-                    CheckListRecord checkListRecord = getCheckListRecord(checkListDay);
+                    CheckListRecord checkListRecord = generateCheckListRecord(checkListDay);
                     int result = checkListRecordMapper.insertOneMapperRecordCondition(checkListRecord);
                     if (result == 1 ) {
                         logger.info("生成每日清单任务成功， 用户：{}， 每日清单：{}", user.getName(), checkListDay.getMatter());
@@ -94,7 +94,7 @@ public class CheckListRecordGenerateSchedule {
 
     }
 
-    private CheckListRecord getCheckListRecord(CheckListDay checkListDay) {
+    private CheckListRecord generateCheckListRecord(CheckListDay checkListDay) {
         Date nowTime = new Date();
         CheckListRecord checkListRecord = new CheckListRecord();
         checkListRecord.setUserId(checkListDay.getUserId());

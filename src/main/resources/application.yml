@@ -14,7 +14,7 @@ spring:
   # 连接Mysql配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/jyk_total
+    url: jdbc:mysql://47.113.98.25:3306/jyk_total
     username: root
     password: Dwxxls@2024
     type: com.alibaba.druid.pool.DruidDataSource
@@ -24,10 +24,10 @@ spring:
       max-file-size: 10MB
   # redis
   redis:
-    host: 127.0.0.1
+    host: 47.113.98.25
     port: 6379
     # 密码
-    password: 123456
+    password: Dwxxls@2024
 
 # MyBatis配置
 mybatis:

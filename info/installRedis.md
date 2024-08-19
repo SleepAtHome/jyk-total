@@ -21,5 +21,9 @@ vim /etc/redis.conf
 修改下面这一行
 requirepass  123456
 
+如果需要远程连接：则进行如下配置
+protected-mode no
+bind 0.0.0.0
+
 重启Redis
 systemctl restart redis

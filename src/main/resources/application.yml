@@ -16,7 +16,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.113.98.25:3306/jyk_total
     username: root
-    password: Dwxxls@2024
+    password: JYK6(8yjzTbzlQSzUBxpREbHJhPp1C4e7Mi58)
     type: com.alibaba.druid.pool.DruidDataSource
   servlet:
     multipart:
@@ -27,7 +27,7 @@ spring:
     host: 47.113.98.25
     port: 6379
     # 密码
-    password: Dwxxls@2024
+    password: JYK6(8yjzTbzlQSzUBxpREbHJhPp1C4e7Mi58)
 
 # MyBatis配置
 mybatis:
@@ -43,3 +43,9 @@ rsa:
   private:
     key: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJF/F0oHMGXkEP9sdDpWVE3H8Wgz4JgHvLc56HYQ7gfvFI2gs4qF51USy56oLMiC0+7avaVH8dD0Hx6U6Bs0ALsuWJZE0T2M3di5usgYrM8C6I3Vnniw60WXr/5tDoiR5WXOdxAK6u2RHlZWfzy88gWDl7UaFMg3tEXi63mee9/nAgMBAAECgYBHzJTclkGe9nYg5g9RPorpu1J5HqilvaO2M6Bwqxgb2DKnVXdkU4H+LIFJMSqwZEdbppxRtPgzKlU1DTyhN/9noJ1il4q55GbPw5H7PEQZrelaRLcML0nx80E3x9iX/DHicdpQJ0vrEbuWaXwcGUoUCb/Wp+IrrqoNlxUaVYzDeQJBAM7mfZS7AOYtjbbI+0rwob6+fmX9Y5kxqsTim48tWxOsXOHO0o7wfCBUzagFyxQRjkWerNX3YXcA7P9hKmAEn80CQQC0BjhoC0Uy8sh8wq4AfM/+/0JLJsM+AQqndnjbGy1QCz7lOe+AncWQHLfj0FZdBQ6nawnFsgVoSvQhJGyG2IKDAkBNzrRPaHwQE/WFVdPa/N924iCark30YI8995JUp9PmdB2B9cuNYbbsWbf1hig25dtBJ0kMNjn7DOgTqjDLZzHJAkEAl5lpZMyg4G+tP8rdptF0gsNIe2rQHeXYp/9PdQvk07Q0qepo8wFpvptAjBsEr16z4W51E0N/5DzCayp2LfQjqwJAZ9gLoFp9K4R7/jQepxjiem1RIli1XqFGjHD7I2O205uiQYGZIsReu2BpLVdN/MBQtRVnvAtkQHsybWcjluRgnA==
 
+# Jasypt配置
+jasypt:
+  encryptor:
+    property:
+      prefix: JYK6(
+      suffix: )

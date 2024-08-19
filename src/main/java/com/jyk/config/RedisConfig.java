@@ -30,11 +30,16 @@ public class RedisConfig {
     @Value("${spring.redis.port}")
     private int redisPort;
 
+    // 从配置文件中读取Redis密码信息
+    @Value("${spring.redis.password}")
+    private String redisPassword;
+
     // 配置Redis连接工厂
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         // 创建Redis的单机配置
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
+        config.setPassword(redisPassword);
         RedisConnectionFactory conn = new LettuceConnectionFactory(config);
         logger.info("Redis初始化..., 结果: {}", conn);
         // 返回Lettuce连接工厂

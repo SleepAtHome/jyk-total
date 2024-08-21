@@ -85,6 +85,8 @@ public class UserServiceImpl implements UserService {
         LoginResp loginResp = new LoginResp();
         String token = TokenUtil.initToken();
         loginResp.setToken(token);
+        loginResp.setUserId(dataU.getId());
+        loginResp.setUserName(dataU.getName());
         redisUtils.set(dataU.getAccount(), token, 300);
         return ResponseVo.success(loginResp);
     }

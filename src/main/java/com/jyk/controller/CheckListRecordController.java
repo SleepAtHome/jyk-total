@@ -48,4 +48,15 @@ public class CheckListRecordController {
         logger.info("手动生成今日事项, 入参: {} ", checkListRecord);
         return checkListRecordService.insertOneMapperRecordCondition(checkListRecord);
     }
+
+    /**
+     * 完成事项
+     * @param checkListRecord id, userId， matterId， finished， memo， updateBy
+     * @return
+     */
+    @PostMapping("/finish")
+    public ResponseVo<Integer> finishOneMapperRecord(@RequestBody CheckListRecord checkListRecord) {
+        logger.info("完成事项, 入参: {} ", checkListRecord);
+        return checkListRecordService.finishOneMapperRecord(checkListRecord);
+    }
 }

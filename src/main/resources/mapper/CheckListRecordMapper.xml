@@ -126,23 +126,35 @@
     </select>
 
 
-    <update id="updateOneMapper" parameterType="com.jyk.dao.CheckListDay">
-        update dish
+    <update id="updateOneMapper" parameterType="com.jyk.dao.CheckListRecord">
+        update check_list_record
         <set>
             <if test="userId != null">
-                and user_id = #{userId}
+                user_id = #{userId},
             </if>
-            <if test="matter != null">
-                and matter = #{matter}
+            <if test="matterId != null">
+                matter_id = #{matterId},
             </if>
-            <if test="frequency != null">
-                and frequency = #{frequency}
+            <if test="checkListType != null">
+                check_list_type = #{checkListType},
+            </if>
+            <if test="matterStartTime != null">
+                matter_start_time = #{matterStartTime},
+            </if>
+            <if test="matterFinishTime != null">
+                matter_finish_time = #{matterFinishTime},
             </if>
             <if test="finished != null">
-                and finished = #{finished}
+                finished = #{finished},
             </if>
             <if test="progress != null">
-                and progress = #{progress}
+                progress = #{progress},
+            </if>
+            <if test="memo != null">
+                memo = #{memo},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
             </if>
             <if test="updateBy != null">
                 update_by = #{updateBy},

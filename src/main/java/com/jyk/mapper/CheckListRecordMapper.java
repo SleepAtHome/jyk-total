@@ -20,5 +20,5 @@ public interface CheckListRecordMapper {
 
     int insertOneMapperRecordCondition(CheckListRecord checkListRecord);
 
-    //int updateOneMapper(CheckListRecord checkListRecord);
+    int updateOneMapper(CheckListRecord checkListRecord);
 }

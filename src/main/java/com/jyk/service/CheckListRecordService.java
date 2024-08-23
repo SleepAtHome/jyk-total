@@ -27,4 +27,11 @@ public interface CheckListRecordService {
      * @return
      */
     ResponseVo<Integer> manuallyGenerated(CheckListRecord checkListRecord);
+
+    /**
+     * 完成事项
+     * @param checkListRecord
+     * @return
+     */
+    ResponseVo<Integer> finishOneMapperRecord(CheckListRecord checkListRecord);
 }

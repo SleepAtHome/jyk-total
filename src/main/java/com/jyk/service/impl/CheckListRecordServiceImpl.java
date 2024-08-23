@@ -98,6 +98,13 @@ public class CheckListRecordServiceImpl implements CheckListRecordService {
         return ResponseVo.success(insertCount);
     }
 
+    @Override
+    public ResponseVo<Integer> finishOneMapperRecord(CheckListRecord checkListRecord) {
+        // 入参：user_id， matter_id， finished， memo， update_by
+        checkListRecord.setMatterFinishTime(new Date());
+        return ResponseVo.success(checkListRecordMapper.updateOneMapper(checkListRecord));
+    }
+
     private CheckListRecord generateCheckListRecord(CheckListDay checkListDay) {
         Date nowTime = new Date();
         CheckListRecord checkListRecord = new CheckListRecord();

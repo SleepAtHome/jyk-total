@@ -10,6 +10,8 @@ import com.jyk.utils.RsaUtils;
 import com.jyk.utils.TokenUtil;
 import com.jyk.vo.ResponseVo;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ import java.util.Objects;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Value("${rsa.private.key}")
     String privateKey;
@@ -87,7 +91,8 @@ public class UserServiceImpl implements UserService {
         loginResp.setToken(token);
         loginResp.setUserId(dataU.getId());
         loginResp.setUserName(dataU.getName());
-        redisUtils.set(dataU.getAccount(), token, 300);
+        //redisUtils.set(dataU.getAccount(), token, 300);
+        logger.info("登录成功，loginResp为：{}", loginResp);
         return ResponseVo.success(loginResp);
     }
 }

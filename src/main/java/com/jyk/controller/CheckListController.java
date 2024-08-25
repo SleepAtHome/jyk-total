@@ -37,7 +37,7 @@ public class CheckListController {
 
     @PostMapping("/add")
     public ResponseVo<Integer> addOneCheckListDay(@RequestBody CheckListDay checkListDay) {
-        logger.info("根据条件获取菜品, 请求参数checkListDay:  " + checkListDay);
+        logger.info("增加一个每日事项（用户）, 请求参数checkListDay:  " + checkListDay);
         return checkListDayService.insertOneCheckListDay(checkListDay);
     }
 

@@ -31,13 +31,13 @@ public class CheckListController {
 
     @PostMapping("/search-condition")
     public ResponseVo<List<CheckListDay>> searchCheckListDayByCondition(@RequestBody CheckListDay checkListDay) {
-        logger.info("根据条件获取CheckList,dish:  " + checkListDay);
+        logger.info("根据条件获取CheckList,checkListDay:  " + checkListDay);
         return checkListDayService.getCheckListByCondition(checkListDay);
     }
 
     @PostMapping("/add")
     public ResponseVo<Integer> addOneCheckListDay(@RequestBody CheckListDay checkListDay) {
-        logger.info("根据条件获取菜品, 请求参数dishRequest为:  " + checkListDay);
+        logger.info("根据条件获取菜品, 请求参数checkListDay:  " + checkListDay);
         return checkListDayService.insertOneCheckListDay(checkListDay);
     }
 

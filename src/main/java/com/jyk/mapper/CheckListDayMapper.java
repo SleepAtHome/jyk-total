@@ -17,7 +17,7 @@ public interface CheckListDayMapper {
 
     List<CheckListDay> selectMappersByCondition(CheckListDay checkListDay);
 
-    int insertOneMapper(CheckListDay checkListDay);
+    int insertOneMapperSelective(CheckListDay checkListDay);
 
     int updateOneMapper(CheckListDay checkListDay);
 }

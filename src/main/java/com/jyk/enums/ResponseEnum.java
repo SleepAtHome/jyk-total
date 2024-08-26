@@ -20,6 +20,7 @@ public enum ResponseEnum {
 
     // E100开始-业务异常
     USER_NO_CHECKLIST_ERROR("E101", "用户没有每日清单!"),
+    USER_NOT_EXIST("E102", "未查到用户"),
     ;
 
     /**

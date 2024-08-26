@@ -20,9 +20,47 @@
         id,user_id,matter,frequency,finished,progress,create_by,create_time,update_by,update_time
     </sql>
 
-    <insert id="insertOneMapper" parameterType="com.jyk.dao.CheckListDay">
-        insert into check_list_day(user_id,matter,frequency,finished,progress,create_by,create_time,update_by,update_time)
-        values(#{dishName},#{food},#{seasoning},#{chief},#{price},#{createBy},#{createTime},#{updateBy},#{updateTime})
+    <insert id="insertOneMapperSelective" parameterType="com.jyk.dao.CheckListDay">
+        insert into check_list_day
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="matter != null">
+                matter,
+            </if>
+            <if test="frequency != null">
+                frequency,
+            </if>
+            <if test="createBy != null and createBy.trim() != ''">
+                create_by,
+            </if>
+            create_time,
+            <if test="updateBy != null and updateBy.trim() != ''">
+                update_by,
+            </if>
+            update_time
+
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="matter != null">
+                #{matter},
+            </if>
+            <if test="frequency != null">
+                #{frequency},
+            </if>
+            <if test="createBy != null and createBy.trim() != ''">
+                #{createBy},
+            </if>
+            NOW(),
+            <if test="updateBy != null and updateBy.trim() != ''">
+                #{updateBy},
+            </if>
+            NOW()
+        </trim>
     </insert>
 
     <select id="selectAllMappers" resultMap="checkListDayResultMap">

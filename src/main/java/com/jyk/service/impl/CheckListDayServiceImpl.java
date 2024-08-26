@@ -1,7 +1,10 @@
 package com.jyk.service.impl;
 
 import com.jyk.dao.CheckListDay;
+import com.jyk.dao.User;
+import com.jyk.enums.ResponseEnum;
 import com.jyk.mapper.CheckListDayMapper;
+import com.jyk.mapper.UserMapper;
 import com.jyk.service.CheckListDayService;
 import com.jyk.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class CheckListDayServiceImpl implements CheckListDayService {
     @Autowired
     CheckListDayMapper checkListDayMapper;
 
+    @Autowired
+    UserMapper userMapper;
+
     @Override
     public ResponseVo<List<CheckListDay>> selectAllCheckListDay() {
         return ResponseVo.success(checkListDayMapper.selectAllMappers());
@@ -27,7 +33,18 @@ public class CheckListDayServiceImpl implements CheckListDayService {
 
     @Override
     public ResponseVo<Integer> insertOneCheckListDay(CheckListDay checkListDay) {
-        return ResponseVo.success(checkListDayMapper.insertOneMapper(checkListDay));
+        if (null == checkListDay || null == checkListDay.getUserId()) {
+            return ResponseVo.error(ResponseEnum.PARAM_ERROR);
+        }
+        User dataU = userMapper.getUserById(checkListDay.getUserId());
+        if (null == dataU) {
+            return ResponseVo.error(ResponseEnum.USER_NOT_EXIST);
+        }
+
+        checkListDay.setCreateBy(dataU.getName());
+        checkListDay.setUpdateBy(dataU.getName());
+
+        return ResponseVo.success(checkListDayMapper.insertOneMapperSelective(checkListDay));
     }
 
     @Override

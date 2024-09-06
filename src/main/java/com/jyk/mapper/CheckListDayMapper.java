@@ -20,4 +20,6 @@ public interface CheckListDayMapper {
     int insertOneMapperSelective(CheckListDay checkListDay);
 
     int updateOneMapper(CheckListDay checkListDay);
+
+    int deleteOneMapperById(Integer mapperId);
 }

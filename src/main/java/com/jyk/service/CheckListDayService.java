@@ -30,4 +30,18 @@ public interface CheckListDayService {
      * @return
      */
     ResponseVo<List<CheckListDay>> getCheckListByCondition(CheckListDay checkListDay);
+
+    /**
+     * 更新CheckListDay
+     * @param checkListDay
+     * @return
+     */
+    ResponseVo<Integer> updateCheckListDay(CheckListDay checkListDay);
+
+    /**
+     * 删除CheckListDay
+     * @param checkListDay
+     * @return
+     */
+    ResponseVo<Integer> deleteCheckListDay(CheckListDay checkListDay);
 }

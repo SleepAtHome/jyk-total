@@ -115,4 +115,8 @@
         where id = #{id}
     </update>
 
+    <delete id="deleteOneMapperById" parameterType="java.lang.Integer">
+        delete from check_list_day where id = #{id}
+    </delete>
+
 </mapper>

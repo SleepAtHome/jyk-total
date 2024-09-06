@@ -51,4 +51,18 @@ public class CheckListDayServiceImpl implements CheckListDayService {
     public ResponseVo<List<CheckListDay>> getCheckListByCondition(CheckListDay checkListDay) {
         return ResponseVo.success(checkListDayMapper.selectMappersByCondition(checkListDay));
     }
+
+    @Override
+    public ResponseVo<Integer> updateCheckListDay(CheckListDay checkListDay) {
+        if (null == checkListDay || null == checkListDay.getId()) {
+            return ResponseVo.error(ResponseEnum.PARAM_ERROR);
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseVo<Integer> deleteCheckListDay(CheckListDay checkListDay) {
+        int result = checkListDayMapper.deleteOneMapperById(checkListDay.getId());
+        return ResponseVo.success(result);
+    }
 }

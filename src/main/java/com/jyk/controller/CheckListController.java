@@ -43,6 +43,13 @@ public class CheckListController {
 
     @PostMapping("/update")
     public ResponseVo<Integer> updateCheckListDay(@RequestBody CheckListDay checkListDay) {
+        logger.info("更新一个每日事项（用户）, 请求参数checkListDay:  " + checkListDay);
+        return null;
+    }
+
+    @PostMapping("/delete")
+    public ResponseVo<Integer> deleteOneCheckListDay(@RequestBody CheckListDay checkListDay) {
+        logger.info("删除一个每日事项（用户）, 请求参数checkListDay:  " + checkListDay);
         return null;
     }
 
